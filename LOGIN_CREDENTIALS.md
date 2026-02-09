@@ -1,39 +1,27 @@
 # 🔐 Login Credentials HERA
 
-## Default Users
+## Default User
 
-Sistem HERA sudah dilengkapi dengan 2 user default untuk testing:
+Sistem HERA sudah dilengkapi dengan 1 user default untuk testing:
 
-### 1. Admin User
-```
-Email: admin@hera.go.id
-Password: admin123
-Role: admin
-```
-**Akses:**
-- ✅ Semua fitur Petugas
-- ✅ Akses admin tambahan
-- ✅ GPR Dashboard
-- ✅ AI Analysis
-- ✅ Manajemen Laporan (CRUD)
-- ✅ Manajemen Aduan Bantuan
-
-### 2. Petugas SAR
+### Petugas SAR
 ```
 Email: petugas@hera.go.id
 Password: petugas123
 Role: petugas
 ```
 **Akses:**
-- ✅ GPR Dashboard
+- ✅ Dashboard lengkap
+- ✅ GPR Visualization
 - ✅ AI Analysis
 - ✅ Manajemen Laporan (CRUD)
 - ✅ Manajemen Aduan Bantuan
+- ✅ Data Bencana BMKG
 
 ## Cara Login
 
 1. Buka browser ke: **http://localhost:5173**
-2. Klik tombol **"Login Petugas"** di navbar
+2. Klik tombol **"Masuk Petugas"** di homepage atau navbar
 3. Masukkan email dan password
 4. Klik **"Login"**
 
@@ -86,13 +74,13 @@ Kemudian update di database:
 ```sql
 UPDATE users 
 SET password = '$2b$10$newHashedPassword' 
-WHERE email = 'user@hera.go.id';
+WHERE email = 'petugas@hera.go.id';
 ```
 
 ## Security Notes
 
 ⚠️ **PENTING untuk Production:**
-1. Ganti semua password default
+1. Ganti password default
 2. Gunakan password yang kuat (min 12 karakter)
 3. Aktifkan 2FA jika memungkinkan
 4. Rotate JWT secret secara berkala
