@@ -94,10 +94,6 @@ Backend akan berjalan di: `http://localhost:5000`
 
 ## 🔐 Login Credentials
 
-**Admin:**
-- Email: `admin@hera.go.id`
-- Password: `admin123`
-
 **Petugas:**
 - Email: `petugas@hera.go.id`
 - Password: `petugas123`
