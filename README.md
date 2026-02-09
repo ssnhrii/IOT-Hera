@@ -4,16 +4,72 @@
 
 Sistem berbasis web yang mengintegrasikan teknologi Ground Penetrating Radar (GPR) dengan analisis AI untuk mendeteksi korban setelah bencana tanah longsor dan banjir di Indonesia.
 
+## 📂 Repository Structure
+
+Repository ini menggunakan branch terpisah untuk memudahkan kolaborasi:
+
+- **`main`** - Branch utama (hanya README.md)
+- **`frontend`** - Branch untuk development frontend (React + Vite + Tailwind)
+- **`backend`** - Branch untuk development backend (Node.js + Express + MySQL)
+
+## 🚀 Quick Start
+
+### Clone Repository
+
+```bash
+git clone https://github.com/ssnhrii/IOT-Hera.git
+cd IOT-Hera
+```
+
+### Untuk Frontend Developer
+
+```bash
+# Checkout branch frontend
+git checkout frontend
+
+# Install dependencies
+cd frontend
+npm install
+
+# Setup environment
+cp .env.example .env
+
+# Run development server
+npm run dev
+```
+
+Frontend akan berjalan di: `http://localhost:5173`
+
+### Untuk Backend Developer
+
+```bash
+# Checkout branch backend
+git checkout backend
+
+# Install dependencies
+cd backend
+npm install
+
+# Setup environment
+cp .env.example .env
+# Edit .env dan isi DB_PASSWORD
+
+# Run development server
+npm run dev
+```
+
+Backend akan berjalan di: `http://localhost:5000`
+
 ## 🎯 Fitur Utama
 
-### **Untuk Guest (Tanpa Login):**
+### Untuk Guest (Tanpa Login):
 1. 📋 **Lihat Laporan Kegiatan** - Baca dokumentasi operasi SAR
 2. 🆘 **Kirim Aduan Bantuan** - Laporkan situasi darurat (tidak perlu login!)
 3. ⚠️ **Info Bencana BMKG** - Lihat data bencana real-time dari BMKG
 
-### **Untuk Petugas (Perlu Login):**
-1. � **Dashboard** - Dashboard lengkap dengan semua informasi penting
-2. �📡 **Visualisasi GPR** - Lihat data GPR dalam format 2D/3D
+### Untuk Petugas (Perlu Login):
+1. 📊 **Dashboard** - Dashboard lengkap dengan semua informasi penting
+2. 📡 **Visualisasi GPR** - Lihat data GPR dalam format 2D/3D
 3. 🤖 **Analisis AI** - Deteksi objek organik/inorganik otomatis
 4. 📋 **Management Laporan** - Create, Read, Update, Delete laporan kegiatan
 5. 👀 **Lihat Aduan Bantuan** - Kelola dan tanggapi aduan dari masyarakat
@@ -36,153 +92,71 @@ Sistem berbasis web yang mengintegrasikan teknologi Ground Penetrating Radar (GP
 - **Maps**: Leaflet
 - **HTTP Client**: Axios
 
-## 📋 Prerequisites
-
-- Node.js 18+ 
-- MySQL 8.0+
-- npm atau yarn
-
-## � Login Credentials
-
-Sistem sudah dilengkapi dengan 2 user default:
+## 🔐 Login Credentials
 
 **Admin:**
 - Email: `admin@hera.go.id`
 - Password: `admin123`
-- Role: admin
 
 **Petugas:**
 - Email: `petugas@hera.go.id`
 - Password: `petugas123`
-- Role: petugas
 
-Lihat [LOGIN_CREDENTIALS.md](LOGIN_CREDENTIALS.md) untuk detail lengkap.
+## 👥 Workflow Kolaborasi
 
-## �🚀 Quick Start
-
-### 1. Install MySQL
-
-**Windows:**
-- Download: https://dev.mysql.com/downloads/installer/
-- Install dan set password root
-
-**Linux:**
-```bash
-sudo apt install mysql-server
-```
-
-**macOS:**
-```bash
-brew install mysql
-```
-
-### 2. Buat Database
+### Untuk Frontend Developer
 
 ```bash
-mysql -u root -p
-CREATE DATABASE hera_db;
-EXIT;
+# Update dari remote
+git checkout frontend
+git pull origin frontend
+
+# Buat perubahan
+# ... edit files ...
+
+# Commit dan push
+git add .
+git commit -m "feat: add new feature"
+git push origin frontend
 ```
 
-### 3. Setup Backend
+### Untuk Backend Developer
 
 ```bash
-cd backend
-npm install
+# Update dari remote
+git checkout backend
+git pull origin backend
 
-# Buat file .env
-cp .env.example .env
-# Edit .env dan isi DB_PASSWORD dengan password MySQL Anda
+# Buat perubahan
+# ... edit files ...
 
-npm run dev
+# Commit dan push
+git add .
+git commit -m "feat: add new API endpoint"
+git push origin backend
 ```
 
-### 4. Setup Frontend
+### Merge ke Main (Setelah Testing)
 
 ```bash
-cd frontend
-npm install
+# Checkout main
+git checkout main
 
-# Buat file .env
-cp .env.example .env
+# Merge frontend
+git merge frontend
 
-npm run dev
+# Merge backend
+git merge backend
+
+# Push ke main
+git push origin main
 ```
 
-### 5. Akses Aplikasi
+## 📋 Prerequisites
 
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:5000
-- Health Check: http://localhost:5000/health
-
-## 📁 Struktur Project
-
-```
-hera-web-application/
-├── backend/                 # Express.js backend
-│   ├── src/
-│   │   ├── config/         # Database config
-│   │   ├── models/         # Sequelize models
-│   │   ├── services/       # Business logic
-│   │   ├── middleware/     # Express middleware
-│   │   ├── routes/         # API routes
-│   │   └── server.js       # Entry point
-│   ├── .env.example
-│   └── package.json
-│
-├── frontend/               # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/         # Page components
-│   │   ├── contexts/      # React Context
-│   │   ├── services/      # API services
-│   │   └── App.jsx
-│   ├── .env.example
-│   └── package.json
-│
-├── CARA_RUNNING_MYSQL.md  # Panduan lengkap
-└── README.md              # File ini
-```
-
-## 🔧 Environment Variables
-
-### Backend (.env)
-```env
-PORT=5000
-NODE_ENV=development
-
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=hera_db
-DB_USER=root
-DB_PASSWORD=your_mysql_password
-
-JWT_SECRET=your-secret-key-min-32-chars
-JWT_EXPIRES_IN=24h
-
-CORS_ORIGIN=http://localhost:5173
-```
-
-### Frontend (.env)
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd backend
-npm test
-
-# Frontend tests
-cd frontend
-npm test
-```
-
-## 📚 Dokumentasi
-
-- **[LOGIN_CREDENTIALS.md](LOGIN_CREDENTIALS.md)** - Kredensial login default
+- Node.js 18+
+- MySQL 8.0+
+- npm atau yarn
 
 ## 🐛 Troubleshooting
 
@@ -199,49 +173,9 @@ sudo systemctl start mysql
 ### Port Already in Use
 Ubah PORT di `.env` backend dan update `VITE_API_URL` di frontend
 
-### Access Denied
-Pastikan password di `.env` sesuai dengan password MySQL
-
-## 📝 Development Status
-
-- ✅ Project structure initialized
-- ✅ MySQL database configured
-- ✅ User model created
-- ⏳ Remaining models (GPRScan, AIAnalysis, Report, HelpRequest, DisasterData)
-- ⏳ Services implementation
-- ⏳ API endpoints
-- ⏳ Frontend components
-
-## 👥 User Roles
-
-1. **Guest** - Public access
-   - View public reports
-   - Submit help requests
-   - View BMKG disaster data
-
-2. **Petugas** - Authenticated officers
-   - All Guest features
-   - GPR data visualization
-   - AI analysis results
-   - Manage reports
-   - Manage help requests
-
-## 🔐 Security
-
-- JWT authentication
-- Password hashing with bcrypt
-- Rate limiting
-- Input sanitization
-- CORS protection
-- Helmet security headers
-
 ## 📄 License
 
 MIT
-
-## 🆘 Support
-
-Jika ada masalah, baca file **CARA_RUNNING_MYSQL.md** untuk troubleshooting lengkap.
 
 ---
 
