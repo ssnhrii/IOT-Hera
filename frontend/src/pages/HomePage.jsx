@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import HelpRequestModal from '../components/help/HelpRequestModal';
 
 const HomePage = () => {
   const { isAuthenticated } = useAuth();
+  const [showHelpModal, setShowHelpModal] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -20,12 +23,12 @@ const HomePage = () => {
               dan analisis AI untuk membantu operasi SAR di Indonesia. Deteksi cepat, akurat, dan real-time.
             </p>
             <div className="flex justify-center gap-4">
-              <Link 
-                to="/help-request" 
+              <button
+                onClick={() => setShowHelpModal(true)}
                 className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition"
               >
                 Aduan Bantuan
-              </Link>
+              </button>
               <Link 
                 to="/bmkg" 
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
@@ -36,6 +39,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Help Request Modal */}
+      <HelpRequestModal isOpen={showHelpModal} onClose={() => setShowHelpModal(false)} />
 
       {/* Cards Section - 4 Cards */}
       <section className="py-16 bg-gray-50">
