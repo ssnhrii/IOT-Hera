@@ -165,7 +165,21 @@ const BMKGPage = () => {
             <p className="text-center text-gray-600 mt-4">Memuat data bencana...</p>
           </div>
         ) : error ? (
-          <ErrorMessage message={error} onRetry={handleRefresh} />
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+            <div className="flex items-center space-x-3">
+              <span className="text-red-600 text-2xl">❌</span>
+              <div>
+                <h3 className="font-semibold text-red-800">Terjadi Kesalahan</h3>
+                <p className="text-red-600">{error}</p>
+                <button 
+                  onClick={handleRefresh}
+                  className="mt-2 text-sm text-red-600 hover:underline"
+                >
+                  Coba Lagi
+                </button>
+              </div>
+            </div>
+          </div>
         ) : filteredDisasters.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
             <div className="text-6xl mb-4">🔍</div>

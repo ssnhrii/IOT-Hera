@@ -163,7 +163,34 @@ const ReportsPage = () => {
               <p className="text-center text-gray-600 mt-4">Memuat laporan...</p>
             </div>
           ) : error ? (
-            <ErrorMessage message={error} />
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+              <div className="flex items-center space-x-3">
+                <span className="text-red-600 text-2xl">❌</span>
+                <div>
+                  <h3 className="font-semibold text-red-800">Terjadi Kesalahan</h3>
+                  <p className="text-red-600">{error}</p>
+                  <button 
+                    onClick={fetchReports}
+                    className="mt-2 text-sm text-red-600 hover:underline"
+                  >
+                    Coba Lagi
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : reports.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-md p-12 text-center">
+              <div className="text-6xl mb-4">📋</div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                Belum Ada Laporan
+              </h3>
+              <p className="text-gray-600">
+                {isAuthenticated 
+                  ? 'Klik tombol "Buat Laporan" untuk membuat laporan pertama'
+                  : 'Belum ada laporan kegiatan yang tersedia'
+                }
+              </p>
+            </div>
           ) : (
             <ReportList
               reports={reports}
