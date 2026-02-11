@@ -3,6 +3,10 @@ node_modules/
 package-lock.json
 yarn.lock
 
+# Branch-specific directories (only for main branch)
+backend/
+frontend/
+
 # Environment variables
 .env
 .env.local

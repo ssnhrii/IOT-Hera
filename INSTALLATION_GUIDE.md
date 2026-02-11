@@ -14,7 +14,26 @@ git clone https://github.com/ssnhrii/IOT-Hera.git
 cd IOT-Hera
 ```
 
-## 🗄️ Step 2: Setup MySQL Database
+## 🌳 Step 2: Choose Development Branch
+
+HERA menggunakan struktur branch terpisah:
+
+### For Backend Development:
+```bash
+git checkout backend
+```
+
+### For Frontend Development:
+```bash
+git checkout frontend
+```
+
+### For Documentation Only:
+```bash
+git checkout main
+```
+
+## 🗄️ Step 3: Setup MySQL Database
 
 ### Windows:
 1. Buka MySQL Command Line atau MySQL Workbench
@@ -31,10 +50,11 @@ CREATE DATABASE hera_db;
 EXIT;
 ```
 
-## ⚙️ Step 3: Setup Backend
+## ⚙️ Step 4: Setup Backend
 
 ```bash
-cd backend
+# Switch to backend branch
+git checkout backend
 
 # Install dependencies
 npm install
@@ -43,7 +63,7 @@ npm install
 # Edit file env dan sesuaikan dengan konfigurasi Anda
 ```
 
-### Edit file `env` di folder backend:
+### Edit file `env` di root directory:
 ```env
 PORT=5000
 NODE_ENV=development
@@ -69,10 +89,11 @@ CORS_ORIGIN=http://localhost:5173
 npm run seed
 ```
 
-## 🎨 Step 4: Setup Frontend
+## 🎨 Step 5: Setup Frontend
 
 ```bash
-cd ../frontend
+# Switch to frontend branch
+git checkout frontend
 
 # Install dependencies (dengan legacy peer deps untuk React 19)
 npm install --legacy-peer-deps
@@ -85,19 +106,19 @@ File `env` frontend sudah benar:
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## 🚀 Step 5: Run Application
+## 🚀 Step 6: Run Application
 
 ### Manual (2 Terminal Terpisah)
 
 **Terminal 1 - Backend:**
 ```bash
-cd backend
+git checkout backend
 npm run dev
 ```
 
 **Terminal 2 - Frontend:**
 ```bash
-cd frontend
+git checkout frontend
 npm run dev
 ```
 
@@ -106,26 +127,26 @@ npm run dev
 **Windows (run.bat):**
 ```batch
 @echo off
-start "Backend" cmd /k "cd backend && npm run dev"
+start "Backend" cmd /k "git checkout backend && npm run dev"
 timeout /t 2 /nobreak >nul
-start "Frontend" cmd /k "cd frontend && npm run dev"
+start "Frontend" cmd /k "git checkout frontend && npm run dev"
 ```
 
 **Linux/Mac (run.sh):**
 ```bash
 #!/bin/bash
-cd backend && npm run dev &
-cd frontend && npm run dev &
+git checkout backend && npm run dev &
+git checkout frontend && npm run dev &
 wait
 ```
 
-## 🌐 Step 6: Access Application
+## 🌐 Step 7: Access Application
 
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5000
 - **Health Check**: http://localhost:5000/health
 
-## 🔐 Step 7: Login
+## 🔐 Step 8: Login
 
 **Credentials:**
 - Email: `petugas@hera.go.id`
@@ -198,25 +219,28 @@ npm run seed
 
 ## 🔧 Development Setup
 
-### Install Development Tools:
+### Backend Development:
 ```bash
 # Backend
-cd backend
+git checkout backend
 npm install -D nodemon
+```
 
+### Frontend Development:
+```bash
 # Frontend
-cd frontend
+git checkout frontend
 npm install -D @vitejs/plugin-react
 ```
 
 ### Run Tests:
 ```bash
 # Backend
-cd backend
+git checkout backend
 npm test
 
 # Frontend
-cd frontend
+git checkout frontend
 npm test
 ```
 
@@ -224,31 +248,32 @@ npm test
 
 ```
 HERA/
-├── backend/                 # Node.js + Express API
+├── main branch/            # Documentation only
+│   ├── README.md          # Project overview
+│   ├── INSTALLATION_GUIDE.md
+│   ├── LOGIN_CREDENTIALS.md
+│   └── GIT_WORKFLOW.md
+│
+├── backend branch/         # Node.js + Express API
 │   ├── src/
-│   │   ├── config/         # Database config
-│   │   ├── models/         # Database models
-│   │   ├── routes/         # API routes
-│   │   ├── services/       # Business logic
-│   │   ├── middleware/     # Express middleware
-│   │   └── server.js       # Entry point
-│   ├── .env.example
+│   │   ├── config/        # Database config
+│   │   ├── models/        # Database models
+│   │   ├── routes/        # API routes
+│   │   ├── services/      # Business logic
+│   │   ├── middleware/    # Express middleware
+│   │   └── server.js      # Entry point
+│   ├── env               # Environment variables
 │   └── package.json
 │
-├── frontend/               # React + Vite
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Page components
-│   │   ├── services/       # API services
-│   │   ├── hooks/          # Custom hooks
-│   │   └── App.jsx
-│   ├── .env.example
-│   └── package.json
-│
-├── start.bat              # Run both servers
-├── README.md              # Project overview
-├── LOGIN_CREDENTIALS.md   # Login info
-└── GIT_WORKFLOW.md       # Git guidelines
+└── frontend branch/       # React + Vite
+    ├── src/
+    │   ├── components/    # React components
+    │   ├── pages/         # Page components
+    │   ├── services/      # API services
+    │   ├── hooks/         # Custom hooks
+    │   └── App.jsx
+    ├── env               # Environment variables
+    └── package.json
 ```
 
 ## 🌐 Production Deployment
@@ -267,11 +292,11 @@ VITE_API_URL=https://your-api-domain.com/api
 ### Build for Production:
 ```bash
 # Frontend
-cd frontend
+git checkout frontend
 npm run build
 
 # Backend (PM2 recommended)
-cd backend
+git checkout backend
 npm install -g pm2
 pm2 start src/server.js --name hera-backend
 ```
@@ -296,18 +321,18 @@ mysql -u root -p
 CREATE DATABASE hera_db;
 
 # 3. Backend
-cd backend
+git checkout backend
 npm install
 # Edit file env dengan password MySQL dan JWT secret
 npm run seed
 
-# 4. Frontend
-cd ../frontend
+# 4. Frontend (terminal baru)
+git checkout frontend
 npm install --legacy-peer-deps
 
 # 5. Run (2 terminal terpisah)
-# Terminal 1: cd backend && npm run dev
-# Terminal 2: cd frontend && npm run dev
+# Terminal 1: git checkout backend && npm run dev
+# Terminal 2: git checkout frontend && npm run dev
 
 # 6. Access
 # http://localhost:5173
