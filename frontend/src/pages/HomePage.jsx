@@ -266,7 +266,7 @@ const HomePage = () => {
                 <p className="mt-4 text-gray-600">
                   Sistem AI HERA memiliki tingkat akurasi hingga 90-95% dalam kondisi ideal. Setiap deteksi 
                   dilengkapi dengan confidence score yang menunjukkan tingkat kepercayaan sistem. Deteksi 
-                  dengan confidence tinggi (>85%) diprioritaskan untuk verifikasi tim SAR.
+                  dengan confidence tinggi (&gt;85%) diprioritaskan untuk verifikasi tim SAR.
                 </p>
               </details>
             </div>
